@@ -1,0 +1,32 @@
+{
+  "version": "0.1",
+  "registered_users": [{
+      "name": "?",
+      "age": 0,
+      "pictures": [
+        "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/images/elliot1.jpg",
+        "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/images/elliot2.jpg",
+        "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/images/elliot3.jpg"
+      ],
+
+      "services": [
+        "Netflix",
+        "Prime-video"
+      ]
+    },
+
+    {
+      "name": "?",
+      "age": 0,
+      "pictures": [
+        "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/images/darlene1.jpg",
+        "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/images/darlene2.jpg",
+        "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/images/darlene3.jpg"
+      ],
+
+      "services": [
+        "Netflix"
+      ]
+    }
+  ]
+}
