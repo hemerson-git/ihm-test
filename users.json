@@ -9,10 +9,7 @@
         "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/images/elliot3.jpg"
       ],
 
-      "services": [
-        "Netflix",
-        "Prime-video"
-      ]
+      "services": []
     },
 
     {
@@ -24,9 +21,7 @@
         "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/images/darlene3.jpg"
       ],
 
-      "services": [
-        "Netflix"
-      ]
+      "services": []
     }
   ]
 }

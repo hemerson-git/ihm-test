@@ -1,0 +1,26 @@
+{
+  "services": [{
+      "name": "Netflix"
+    },
+
+    {
+      "name": "Prime Video"
+    },
+
+    {
+      "name": "Disney+"
+    },
+
+    {
+      "name": "HBO"
+    },
+
+    {
+      "name": "Starz"
+    },
+
+    {
+      "name": "YouTube Premium"
+    }
+  ]
+}
