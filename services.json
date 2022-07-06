@@ -1,26 +1,112 @@
 {
   "services": [{
-      "name": "Netflix"
+      "name": "Netflix",
+      "content": [{
+          "title": "strange things",
+          "age": 16
+        },
+
+        {
+          "title": "Top Gun: Maverick",
+          "age": 12
+        },
+
+        {
+          "title": "Shooter",
+          "age": 16
+        },
+
+        {
+          "title": "Paw Patrol",
+          "age": 0
+        }
+      ]
     },
 
     {
-      "name": "Prime Video"
+      "name": "Prime Video",
+      "content": [{
+          "title": "The Boys",
+          "age": 18
+        },
+
+        {
+          "title": "Hanna",
+          "age": 14
+        },
+
+        {
+          "title": "Mr. Robot",
+          "age": 16
+        },
+
+        {
+          "title": "Dino Dena",
+          "age": 10
+        }
+      ]
     },
 
     {
-      "name": "Disney+"
+      "name": "Disney+",
+      "content": [{
+          "title": "The Lion King",
+          "age": 0
+        },
+
+        {
+          "title": "The Incredibles",
+          "age": 0
+        },
+
+        {
+          "title": "The Incredibles 2",
+          "age": 16
+        }
+      ]
     },
 
     {
-      "name": "HBO"
+      "name": "HBO",
+      "content": [{
+          "title": "The Last Airbender",
+          "age": 16
+        },
+
+        {
+          "title": "Game of Thrones",
+          "age": 18
+        },
+
+        {
+          "title": "The Originals",
+          "age": 16
+        },
+
+        {
+          "title": "The Croods",
+          "age": 0
+        }
+      ]
     },
 
     {
-      "name": "Starz"
-    },
+      "name": "Starz",
+      "content": [{
+          "title": "The Great",
+          "age": 16
+        },
 
-    {
-      "name": "YouTube Premium"
+        {
+          "title": "Jane Eyre",
+          "age": 12
+        },
+
+        {
+          "title": "Castle Rock",
+          "age": 16
+        }
+      ]
     }
   ]
 }

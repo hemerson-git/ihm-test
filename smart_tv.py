@@ -1,7 +1,5 @@
-from os import access
-import re
+from re import A
 from time import sleep
-from zoneinfo import available_timezones
 import face_recognition
 import secrets
 import random
@@ -102,7 +100,7 @@ def recognize_user(user):
             is_recognized = True
 
             user['name'] = faker_generator.name()
-            user['age'] = random.randint(1, 100)
+            user['age'] = random.randint(1, 59)
             user['services'] = []
 
             for service in stream_services['services']:
@@ -131,7 +129,8 @@ def identify_user(env):
         is_recognized, user = recognize_user(detected_person)
 
         if is_recognized:
-            print("\033[32mUser: {} recognized \033[37m".format(user['name']))
+            print(
+                "\033[32mUser: {} - {}yo recognized \033[37m".format(user['name'], user['age']))
 
             access_id = secrets.token_hex(nbytes=16).upper()
             recognized_users[access_id] = user
@@ -146,6 +145,9 @@ def print_available_services(username, services):
     for service in services:
         print("\t- {}".format(service['name']))
 
+        for content in service['content']:
+            print("\t\t- {}".format(content['title']))
+
 
 def verify_user_access(user):
     global stream_services
@@ -155,7 +157,16 @@ def verify_user_access(user):
     for service in user['services']:
         for stream_service in stream_services['services']:
             if (service['name'] == stream_service['name']):
-                available_services.append(stream_service)
+                available_content = []
+
+                for content in stream_service['content']:
+                    if (content['age'] <= user['age']):
+                        available_content.append(content)
+
+                available_services.append({
+                    "name": stream_service['name'],
+                    "content": available_content
+                })
 
     print_available_services(user['name'], available_services)
 
