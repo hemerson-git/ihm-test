@@ -69,7 +69,7 @@ def simulate_detect_user():
     return user
 
 
-def recognize_user(user):
+def recognize_user(env, user):
     global configs
     global faker_generator
 
@@ -126,7 +126,7 @@ def identify_user(env):
 
     while True:
         detected_person = simulate_detect_user()
-        is_recognized, user = recognize_user(detected_person)
+        is_recognized, user = recognize_user(env, detected_person)
 
         if is_recognized:
             print(
