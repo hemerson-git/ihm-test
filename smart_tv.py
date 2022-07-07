@@ -5,7 +5,6 @@ import secrets
 import random
 import faker
 import json
-import simpy
 
 CONFIG_FILE = "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/users.json"
 SERVICES_DB = "/mnt/c/Users/hemer/OneDrive/Área de Trabalho/ihm/005_smart_tv/services.json"
@@ -37,9 +36,6 @@ REGISTER_VERIFICATION_INTERVAL = 200
 
 
 def prepare():
-    global configs
-    global stream_services
-
     stream_services = None
     with open(SERVICES_DB, "r") as services_db:
         stream_services = json.load(services_db)
@@ -53,26 +49,23 @@ def prepare():
             print("\033[36m[INFO] Configs loaded, version {}\033[37m".format(
                 configs["version"]))
 
-    global recognized_users
     recognized_users = {}
 
-    global faker_generator
     faker_generator = faker.Faker()
 
+    return stream_services, configs, recognized_users, faker_generator
 
-def simulate_detect_user():
+
+def simulate_detect_user(person_picture):
     user = {
-        "picture": random.choice(USERS_PICTURES),
+        "picture": person_picture,
         "services": {}
     }
 
     return user
 
 
-def recognize_user(user):
-    global configs
-    global faker_generator
-
+def recognize_user(user, configs, faker_generator, stream_services):
     print("Starting to recognize visitor...")
 
     # to cause a suspense in the simulation
@@ -119,25 +112,16 @@ def get_age_recommendation():
     return age
 
 
-def identify_user(env):
-    global configs
-    global faker_generator
-    global recognized_users
+def identify_user(recognized_users, user, is_recognized):
 
-    while True:
-        detected_person = simulate_detect_user()
-        is_recognized, user = recognize_user(detected_person)
+    if is_recognized:
+        print(
+            "\033[32mUser: {} - {}yo recognized \033[37m".format(user['name'], user['age']))
 
-        if is_recognized:
-            print(
-                "\033[32mUser: {} - {}yo recognized \033[37m".format(user['name'], user['age']))
-
-            access_id = secrets.token_hex(nbytes=16).upper()
-            recognized_users[access_id] = user
-        else:
-            print("\033[31mUser not recognized \033[37m")
-
-        yield env.timeout(USER_RECOGNITION_INTERVAL)
+        access_id = secrets.token_hex(nbytes=16).upper()
+        recognized_users[access_id] = user
+    else:
+        print("\033[31mUser not recognized \033[37m")
 
 
 def print_available_services(username, services):
@@ -149,8 +133,7 @@ def print_available_services(username, services):
             print("\t\t- {}".format(content['title']))
 
 
-def verify_user_access(user):
-    global stream_services
+def verify_user_access(user, stream_services):
 
     available_services = []
 
@@ -171,24 +154,9 @@ def verify_user_access(user):
     print_available_services(user['name'], available_services)
 
 
-def verify_registration(env):
-    global recognized_users
-    global stream_services
-
-    while True:
-        if len(recognized_users):
-            for access_id, user in list(recognized_users.items()):
-                verify_user_access(user)
-                recognized_users.pop(access_id)
-
-        yield env.timeout(REGISTER_VERIFICATION_INTERVAL)
-
-
-if __name__ == '__main__':
-    prepare()
-
-    env = simpy.Environment()
-    env.process(identify_user(env))
-    env.process(verify_registration(env))
-
-    env.run(until=10000)
+def verify_registration(recognized_users, stream_services):
+    if len(recognized_users):
+        for access_id, user in list(recognized_users.items()):
+            verify_user_access(user, stream_services)
+            granted_access_user = recognized_users.pop(access_id)
+            return granted_access_user
